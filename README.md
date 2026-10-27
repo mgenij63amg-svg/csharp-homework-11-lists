@@ -97,6 +97,4 @@ dotnet test -c Release
 Условия: [домашняя работа 11 Списки для задач](https://github.com/OTUS-NET/C-Sharp-Basic/blob/main/Homeworks/11%20%D0%A1%D0%BF%D0%B8%D1%81%D0%BA%D0%B8%20%D0%B4%D0%BB%D1%8F%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/Task.md).
 По [правилам курса](https://github.com/OTUS-NET/C-Sharp-Basic/blob/main/Homeworks/README.md) сдаётся ссылка на Pull Request.
 
-Основа - предыдущая работа 10 из ветки feature/homework-10-scenarios. Изменения работы 11 находятся в feature/homework-11-lists. Для отдельного просмотра изменений PR направляется в ветку предыдущей работы: она пока не слита в main. Предыдущий PR не изменяется и автоматически не сливается.
-
-Ссылка для сдачи: [Pull Request домашней работы 11](https://github.com/mgenij63amg-svg/csharp-homework-10-scenarios/pull/2).
+Основа - бот из домашней работы 10. В этом репозитории ветка main содержит исходную основу, а feature/homework-11-lists - изменения домашней работы 11. Pull Request направлен в main, поэтому сравнение показывает только изменения по спискам. Предыдущий репозиторий и его работа сохраняются отдельно.
