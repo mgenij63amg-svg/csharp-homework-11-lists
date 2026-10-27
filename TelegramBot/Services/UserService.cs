@@ -1,34 +1,12 @@
-using TelegramBot.Models;
-
+using Core.Entities;
+using TelegramBot.Repositories;
 namespace TelegramBot.Services;
 
 public sealed class UserService : IUserService
 {
-    private readonly Dictionary<long, ToDoUser> _users = new();
-    private readonly object _sync = new();
-
-    public Task<ToDoUser> RegisterUser(long telegramUserId, string? userName, CancellationToken ct)
-    {
-        ct.ThrowIfCancellationRequested();
-        lock (_sync)
-        {
-            if (!_users.TryGetValue(telegramUserId, out var user))
-            {
-                user = new ToDoUser { TelegramUserId = telegramUserId };
-                _users.Add(telegramUserId, user);
-            }
-            user.TelegramUserName = userName;
-            return Task.FromResult(user);
-        }
-    }
-
-    public Task<ToDoUser?> GetUser(long telegramUserId, CancellationToken ct)
-    {
-        ct.ThrowIfCancellationRequested();
-        lock (_sync)
-        {
-            _users.TryGetValue(telegramUserId, out var user);
-            return Task.FromResult(user);
-        }
-    }
+    private readonly FileUserRepository _repository;
+    public UserService(FileUserRepository repository) => _repository = repository;
+    public Task<ToDoUser> RegisterUser(long telegramUserId, string? userName, CancellationToken ct) =>
+        _repository.Register(telegramUserId, userName, ct);
+    public Task<ToDoUser?> GetUser(long telegramUserId, CancellationToken ct) => _repository.Get(telegramUserId, ct);
 }

@@ -6,3 +6,8 @@
 *.suo
 TestResults/
 .env
+
+data/
+*.log
+*.tmp
+.env.*

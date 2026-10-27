@@ -1,4 +1,4 @@
-namespace TelegramBot.Models;
+namespace Core.Entities;
 
 public enum ToDoItemState
 {

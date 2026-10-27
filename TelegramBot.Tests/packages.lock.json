@@ -170,9 +170,13 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "core": {
+        "type": "Project"
+      },
       "telegrambot": {
         "type": "Project",
         "dependencies": {
+          "Core": "[1.0.0, )",
           "Telegram.Bot": "[22.5.1, )"
         }
       }

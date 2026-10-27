@@ -1,4 +1,4 @@
-using TelegramBot.Models;
+using Core.Entities;
 
 namespace TelegramBot.Services;
 
