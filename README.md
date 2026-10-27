@@ -98,3 +98,5 @@ dotnet test -c Release
 По [правилам курса](https://github.com/OTUS-NET/C-Sharp-Basic/blob/main/Homeworks/README.md) сдаётся ссылка на Pull Request.
 
 Основа - бот из домашней работы 10. В этом репозитории ветка main содержит исходную основу, а feature/homework-11-lists - изменения домашней работы 11. Pull Request направлен в main, поэтому сравнение показывает только изменения по спискам. Предыдущий репозиторий и его работа сохраняются отдельно.
+
+Ссылка для сдачи: [Pull Request домашней работы 11](https://github.com/mgenij63amg-svg/csharp-homework-11-lists/pull/1).
