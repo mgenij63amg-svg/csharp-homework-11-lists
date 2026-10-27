@@ -215,6 +215,39 @@ public sealed class ScenarioTests
         Assert.Contains("подтверждения",f.LastText); Assert.DoesNotContain("/showtasks",f.LastText);
     }
 
+    [Theory]
+    [InlineData(0, null)]
+    [InlineData(1, "")]
+    [InlineData(2, "tasklist|broken")]
+    [InlineData(2, "too-long")]
+    public async Task MalformedCallbackKeepsScenarioKeyboard(int step, string? payload)
+    {
+        using var f = new BotFixture();
+        await f.Begin();
+        if (step >= 1) await f.Send("Keep name");
+        if (step >= 2) await f.Send("01.01.2030");
+        var expectedStep = (await f.Context())!.CurrentStep;
+
+        await f.Click(payload == "too-long" ? new string('a', 65) : payload);
+
+        Assert.Equal(expectedStep, (await f.Context())!.CurrentStep);
+        Assert.Equal(new[] { "/cancel" }, f.LastButtons);
+        Assert.Empty(await f.Items());
+        if (step == 2)
+        {
+            await f.Choose(null);
+            Assert.Equal("Keep name", Assert.Single(await f.Items()).Name);
+            Assert.Null(await f.Context());
+        }
+        else
+        {
+            await f.Send("/cancel");
+            Assert.Null(await f.Context());
+            Assert.Empty(await f.Items());
+        }
+        Assert.Equal(new[] { "/addtask", "/show", "/report" }, f.LastButtons);
+    }
+
     [Fact]
     public async Task NonMessagesGroupsAndMissingScenarioAreHandled()
     {

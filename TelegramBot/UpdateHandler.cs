@@ -129,7 +129,16 @@ public sealed class UpdateHandler
                 default: await Reply(query.From.Id, "Эта кнопка устарела. Откройте /show.", ct); break;
             }
         }
-        catch (FormatException) { await Reply(query.From.Id, "Некорректные данные кнопки. Откройте /show.", ct); }
+        catch (FormatException)
+        {
+            var active = await _contexts.GetContext(query.From.Id, ct);
+            await _bot.SendMessage(query.From.Id,
+                active is null
+                    ? "Некорректные данные кнопки. Откройте /show."
+                    : "Некорректные данные кнопки. Используйте последнюю клавиатуру или /cancel.",
+                replyMarkup: active is null ? BotKeyboards.Main : BotKeyboards.Cancel,
+                cancellationToken: ct);
+        }
     }
 
     public IScenario GetScenario(ScenarioType scenario) => _scenarios.FirstOrDefault(x => x.CanHandle(scenario))
